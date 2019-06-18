@@ -30,6 +30,7 @@ function Pictures(name, id, URL) {
   this.id = id;
   this.URL = URL;
   this.clickCounter = 0;
+  this.timeShown = 0;
 }
 
 /*********************** HELPER FUNCTIONS *******************************************/
@@ -73,7 +74,7 @@ function renderSummaryDisplay() {
 
   for (var i = 0; i < lengthOfObjects; i++) {
     liId[i] = document.createElement('li');
-    liId[i].textContent = arrayOfPictures[i].name + ': ' + arrayOfPictures[i].clickCounter;
+    liId[i].textContent = arrayOfPictures[i].name + ': ' + arrayOfPictures[i].clickCounter + '  Times'+ arrayOfPictures[i].timeShown;
     ulId.appendChild(liId[i]);
   }
 }
@@ -121,6 +122,9 @@ var handleClickOnImage = function(event){
   if (totalAllowedClicks < 25) {
     var id = event.target.id;
     var index_values = generateRandomImageIndex(lengthOfObjects-1);
+    arrayOfPictures[index_values[0]].timeShown++;
+    arrayOfPictures[index_values[1]].timeShown++;
+    arrayOfPictures[index_values[2]].timeShown++;
     renderDisplayImages(index_values[0], index_values[1], index_values[2]);
     arrayOfPictures[id].clickCounter++;
     // console.log(event.target.id);

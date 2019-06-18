@@ -9,6 +9,7 @@ var arrayOfURLs = []; //Array containing the URLs of the images
 var arrayOfPictures = []; //Array containing the Pictures Objects
 var indexOfRecentPictues = []; //Array containing the ids of three most recent pictures
 var lengthOfObjects = 20; //Update this variable with new images added into the project
+var totalAllowedClicks = 0;
 
 
 //Rendering Global variables to collect elements & tags
@@ -68,7 +69,6 @@ function renderDisplayImages(left_id, middle_id, right_id) {
 }
 
 function generateRandomImageIndex(max) {
-  console.log(indexOfRecentPictues);
   //Generate left id that has not been used previously
   do {
     var left_id = Math.floor(Math.random() * Math.floor(max));
@@ -90,26 +90,31 @@ function generateRandomImageIndex(max) {
   indexOfRecentPictues.push(middle_id);
   indexOfRecentPictues.push(right_id);
 
-  renderDisplayImages(left_id, middle_id, right_id);
   return [left_id, middle_id, right_id];
 }
 
+//Create default pictures and renderings before the click event
 createPicturesObjects(); //Sets filenames, URLs and creates object with that information
+var index_values = generateRandomImageIndex(lengthOfObjects-1);
+renderDisplayImages(index_values[0], index_values[1], index_values[2]);
+demo();
 
-var i = 0;
+function demo() {
+  for (var i = 0; i < 20; i++) {
+    console.log(arrayOfPictures[i].name + ' ' + arrayOfPictures[i].clickCounter);
+  }
+}
 
 var handleClickOnGoat = function(event){
-  while ()
-
-renderDisplayImages(0, 1, 2);
-
+  for(var i = 0; i < 25; i++) {
+    var index_values = generateRandomImageIndex(lengthOfObjects-1);
+    renderDisplayImages(index_values[0], index_values[1], index_values[2]);
+    arrayOfPictures[event.target.id].clickCounter++;
+    // console.log(event.target.id);
+    totalAllowedClicks++;
+  }
 
   
-  
-  console.log(event.target.id);
-
-  
-
 
 
 };
@@ -117,6 +122,7 @@ renderDisplayImages(0, 1, 2);
 leftImageTag.addEventListener('click', handleClickOnGoat);
 middleImageTag.addEventListener('click', handleClickOnGoat);
 rightImageTag.addEventListener('click', handleClickOnGoat);
+
 
 
 

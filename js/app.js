@@ -78,7 +78,7 @@ function renderSummaryDisplay() {
     ulId.appendChild(liId[i]);
   }
 }
-
+//Generates three random indices (left_index, middle_index, & right_index) used torender the display
 function generateRandomImageIndex(max) {
   //Generate left id that has not been used previously
   do {
@@ -104,18 +104,73 @@ function generateRandomImageIndex(max) {
   return [left_id, middle_id, right_id];
 }
 
+//To display and verify from console
 function consoleClickCounts() {
   for (var i = 0; i < 20; i++) {
-    console.log(arrayOfPictures[i].name + ' ' + arrayOfPictures[i].clickCounter);
+    console.log(arrayOfPictures[i].name + ' ' + arrayOfPictures[i].clickCounter + ' Times Shown: '+ arrayOfPictures[i].timeShown);
   }
 }
+
+function createChart() {
+  var percentages = [];
+  for (var i =0; i < lengthOfObjects; i++) {
+    percentages.push(Math.round((arrayOfPictures[i].clickCounter / arrayOfPictures[i].timeShown) * 100));
+  }
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: arrayOfFileNames,
+      datasets: [{
+        label: '# of Votes',
+        data: percentages,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
+
+/*********************** HELPER FUNCTIONS ENDLINE *******************************************/
+
+
+
+/*********************** DEFAULT *******************************************/
 
 //Create default pictures and renderings before the click event
 createPicturesObjects(); //Sets filenames, URLs and creates object with that information
 var index_values = generateRandomImageIndex(lengthOfObjects-1);
+arrayOfPictures[index_values[0]].timeShown++;
+arrayOfPictures[index_values[1]].timeShown++;
+arrayOfPictures[index_values[2]].timeShown++;
 renderDisplayImages(index_values[0], index_values[1], index_values[2]);
 
 
+/*********************** DRIVER *******************************************/
 
 var handleClickOnImage = function(event){
 
@@ -134,7 +189,8 @@ var handleClickOnImage = function(event){
     middleImageTag.removeEventListener('click', handleClickOnImage);
     rightImageTag.removeEventListener('click', handleClickOnImage);
     consoleClickCounts();
-    renderSummaryDisplay();
+    // renderSummaryDisplay();
+    createChart();
   }
 };
 
@@ -142,6 +198,4 @@ leftImageTag.addEventListener('click', handleClickOnImage);
 middleImageTag.addEventListener('click', handleClickOnImage);
 rightImageTag.addEventListener('click', handleClickOnImage);
 
-
-
-
+/*********************** DRIVER ENLDLINE *******************************************/

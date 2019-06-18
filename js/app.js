@@ -66,7 +66,7 @@ function renderDisplayImages(left_id, middle_id, right_id) {
   rightPTag.textContent = arrayOfPictures[right_id].name;
 }
 
-//Rendering Global variables to collect total likes
+//Rendering Summary in the display
 function renderSummaryDisplay() {
   var ulId = document.getElementById('clicks-count');
   var liId = [];
@@ -119,9 +119,9 @@ renderDisplayImages(index_values[0], index_values[1], index_values[2]);
 var handleClickOnImage = function(event){
 
   if (totalAllowedClicks < 25) {
+    var id = event.target.id;
     var index_values = generateRandomImageIndex(lengthOfObjects-1);
     renderDisplayImages(index_values[0], index_values[1], index_values[2]);
-    var id = event.target.id;
     arrayOfPictures[id].clickCounter++;
     // console.log(event.target.id);
     totalAllowedClicks++;

@@ -66,6 +66,18 @@ function renderDisplayImages(left_id, middle_id, right_id) {
   rightPTag.textContent = arrayOfPictures[right_id].name;
 }
 
+//Rendering Global variables to collect total likes
+function renderSummaryDisplay() {
+  var ulId = document.getElementById('clicks-count');
+  var liId = [];
+
+  for (var i = 0; i < lengthOfObjects; i++) {
+    liId[i] = document.createElement('li');
+    liId[i].textContent = arrayOfPictures[i].name + ': ' + arrayOfPictures[i].clickCounter;
+    ulId.appendChild(liId[i]);
+  }
+}
+
 function generateRandomImageIndex(max) {
   //Generate left id that has not been used previously
   do {
@@ -118,9 +130,8 @@ var handleClickOnImage = function(event){
     middleImageTag.removeEventListener('click', handleClickOnImage);
     rightImageTag.removeEventListener('click', handleClickOnImage);
     consoleClickCounts();
+    renderSummaryDisplay();
   }
-
-
 };
 
 leftImageTag.addEventListener('click', handleClickOnImage);

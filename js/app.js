@@ -23,7 +23,6 @@ var middlePTag = document.getElementById('middle_pic_h2');
 var rightImageTag = document.getElementById('right_pic');
 var rightPTag = document.getElementById('right_pic_h2');
 
-
 /***************************** CONSTRUCTOR *****************************************/
 function Pictures(name, id, URL) {
   this.name = name;
@@ -66,6 +65,19 @@ function renderDisplayImages(left_id, middle_id, right_id) {
   rightPTag.textContent = arrayOfPictures[right_id].name;
 }
 
+//Rendering Global variables to collect total likes
+function renderSummaryDisplay() {
+  var ulId = document.getElementById('clicks-count');
+  var liId = [];
+
+  for (var i = 0; i < lengthOfObjects; i++) {
+    liId[i] = document.createElement('li');
+    liId[i].textContent = arrayOfPictures[i].name + ': ' + arrayOfPictures[i].clickCounter;
+    ulId.appendChild(liId[i]);
+  }
+}
+
+
 function generateRandomImageIndex(max) {
   //Generate left id that has not been used previously
   do {
@@ -105,11 +117,11 @@ renderDisplayImages(index_values[0], index_values[1], index_values[2]);
 
 
 var handleClickOnImage = function(event){
-
   if (totalAllowedClicks < 25) {
+    var id = event.target.id;
     var index_values = generateRandomImageIndex(lengthOfObjects-1);
     renderDisplayImages(index_values[0], index_values[1], index_values[2]);
-    var id = event.target.id;
+    // console.log('id ' + id);
     arrayOfPictures[id].clickCounter++;
     // console.log(event.target.id);
     totalAllowedClicks++;
@@ -118,6 +130,7 @@ var handleClickOnImage = function(event){
     middleImageTag.removeEventListener('click', handleClickOnImage);
     rightImageTag.removeEventListener('click', handleClickOnImage);
     consoleClickCounts();
+    renderSummaryDisplay();
   }
 
 

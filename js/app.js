@@ -9,6 +9,7 @@ var arrayOfURLs = []; //Array containing the URLs of the images
 var arrayOfPictures = []; //Array containing the Pictures Objects
 var indexOfRecentPictues = []; //Array containing the ids of three most recent pictures
 var lengthOfObjects = 20; //Update this variable with new images added into the project
+var totalAllowedClicks = 0;
 
 
 //Rendering Global variables to collect elements & tags
@@ -32,8 +33,6 @@ function Pictures(name, id, URL) {
 }
 
 /*********************** HELPER FUNCTIONS *******************************************/
-
-console.log('Working');
 
 function setFileNames() {
   arrayOfFileNames = ['Bag', 'Banana-cutter','iPad Holder', 'Boots', 'Breakfast Maker','Bubblegum', 'Chair', 'Cthulhu', 'Dog-duck', 'Dragon', 'Pen','Pet-Sweep', 'Scissors', 'Shark', 'Baby-Sweep', 'Tauntaun', 'Unicorn', 'USB', 'Water-can', 'Wine-glass'];
@@ -68,7 +67,6 @@ function renderDisplayImages(left_id, middle_id, right_id) {
 }
 
 function generateRandomImageIndex(max) {
-  console.log(indexOfRecentPictues);
   //Generate left id that has not been used previously
   do {
     var left_id = Math.floor(Math.random() * Math.floor(max));
@@ -90,33 +88,45 @@ function generateRandomImageIndex(max) {
   indexOfRecentPictues.push(middle_id);
   indexOfRecentPictues.push(right_id);
 
-  renderDisplayImages(left_id, middle_id, right_id);
   return [left_id, middle_id, right_id];
 }
 
+function consoleClickCounts() {
+  for (var i = 0; i < 20; i++) {
+    console.log(arrayOfPictures[i].name + ' ' + arrayOfPictures[i].clickCounter);
+  }
+}
+
+//Create default pictures and renderings before the click event
 createPicturesObjects(); //Sets filenames, URLs and creates object with that information
-
-var i = 0;
-
-var handleClickOnGoat = function(event){
-  while ()
-
-renderDisplayImages(0, 1, 2);
+var index_values = generateRandomImageIndex(lengthOfObjects-1);
+renderDisplayImages(index_values[0], index_values[1], index_values[2]);
 
 
-  
-  
-  console.log(event.target.id);
 
-  
+var handleClickOnImage = function(event){
 
+  if (totalAllowedClicks < 25) {
+    var index_values = generateRandomImageIndex(lengthOfObjects-1);
+    renderDisplayImages(index_values[0], index_values[1], index_values[2]);
+    var id = event.target.id;
+    arrayOfPictures[id].clickCounter++;
+    // console.log(event.target.id);
+    totalAllowedClicks++;
+  } else {
+    leftImageTag.removeEventListener('click', handleClickOnImage);
+    middleImageTag.removeEventListener('click', handleClickOnImage);
+    rightImageTag.removeEventListener('click', handleClickOnImage);
+    consoleClickCounts();
+  }
 
 
 };
 
-leftImageTag.addEventListener('click', handleClickOnGoat);
-middleImageTag.addEventListener('click', handleClickOnGoat);
-rightImageTag.addEventListener('click', handleClickOnGoat);
+leftImageTag.addEventListener('click', handleClickOnImage);
+middleImageTag.addEventListener('click', handleClickOnImage);
+rightImageTag.addEventListener('click', handleClickOnImage);
+
 
 
 

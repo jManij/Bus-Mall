@@ -34,8 +34,6 @@ function Pictures(name, id, URL) {
 
 /*********************** HELPER FUNCTIONS *******************************************/
 
-console.log('Working');
-
 function setFileNames() {
   arrayOfFileNames = ['Bag', 'Banana-cutter','iPad Holder', 'Boots', 'Breakfast Maker','Bubblegum', 'Chair', 'Cthulhu', 'Dog-duck', 'Dragon', 'Pen','Pet-Sweep', 'Scissors', 'Shark', 'Baby-Sweep', 'Tauntaun', 'Unicorn', 'USB', 'Water-can', 'Wine-glass'];
 }
@@ -93,35 +91,41 @@ function generateRandomImageIndex(max) {
   return [left_id, middle_id, right_id];
 }
 
-//Create default pictures and renderings before the click event
-createPicturesObjects(); //Sets filenames, URLs and creates object with that information
-var index_values = generateRandomImageIndex(lengthOfObjects-1);
-renderDisplayImages(index_values[0], index_values[1], index_values[2]);
-demo();
-
-function demo() {
+function consoleClickCounts() {
   for (var i = 0; i < 20; i++) {
     console.log(arrayOfPictures[i].name + ' ' + arrayOfPictures[i].clickCounter);
   }
 }
 
-var handleClickOnGoat = function(event){
-  for(var i = 0; i < 25; i++) {
+//Create default pictures and renderings before the click event
+createPicturesObjects(); //Sets filenames, URLs and creates object with that information
+var index_values = generateRandomImageIndex(lengthOfObjects-1);
+renderDisplayImages(index_values[0], index_values[1], index_values[2]);
+
+
+
+var handleClickOnImage = function(event){
+
+  if (totalAllowedClicks < 25) {
     var index_values = generateRandomImageIndex(lengthOfObjects-1);
     renderDisplayImages(index_values[0], index_values[1], index_values[2]);
-    arrayOfPictures[event.target.id].clickCounter++;
+    var id = event.target.id;
+    arrayOfPictures[id].clickCounter++;
     // console.log(event.target.id);
     totalAllowedClicks++;
+  } else {
+    leftImageTag.removeEventListener('click', handleClickOnImage);
+    middleImageTag.removeEventListener('click', handleClickOnImage);
+    rightImageTag.removeEventListener('click', handleClickOnImage);
+    consoleClickCounts();
   }
-
-  
 
 
 };
 
-leftImageTag.addEventListener('click', handleClickOnGoat);
-middleImageTag.addEventListener('click', handleClickOnGoat);
-rightImageTag.addEventListener('click', handleClickOnGoat);
+leftImageTag.addEventListener('click', handleClickOnImage);
+middleImageTag.addEventListener('click', handleClickOnImage);
+rightImageTag.addEventListener('click', handleClickOnImage);
 
 
 

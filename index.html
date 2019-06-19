@@ -4,56 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Bus-Mall</title>
-  <link rel="stylesheet" href="./css/style.css">
+  <title>Bus-Mall Project</title>
+
+  <!-- Change this -->
+  <link rel="stylesheet" href="./css/style.css">  
+  <!-- <link rel="stylesheet" href="reset.css"> -->
 </head>
-<body>
-  <header> 
-    <nav> 
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html">Products</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <section>
-      <ul id="clicks-count">
-        <h2>Total Likes</h2>
-      </ul>
-    </section>
-    <section id="all_pictures">
-      <h1>Click the image you like</h1>
-      
-      <div id="left_img_content"> 
-        <img id="left_pic" src="" alt="Left Image">
+
+<header>
+  <nav>
+    <ul>
+      <li><img id="logo" src="https://cdn.dribbble.com/users/1928873/screenshots/6456745/bus_animation.gif" alt="logo"></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="all_pictures">
+    <ul>
+      <section>
+          <li><img id="left_pic" src="https://placehold.it/250x250/111" alt="left-image" ></li>
+          <p id="left_pic_h2">Default Left</p>
+      </section>
+
+      <section>
+          <li><img id="middle_pic" src="https://placehold.it/250x250/111" alt="middle-image"></li>
+          <p id="middle_pic_h2">Default Middle</p>
+      </section>
+      <section>
+          <li><img id="right_pic" src="https://placehold.it/250x250/111" alt="right-image"></li>
+          <p id="right_pic_h2">Default Right</p>
+      </section>
+
         
-        <p id="left_pic_h2">Default Left</p>
-      </div>
-
-      <div id="middle_img_content"> 
-        <img id="middle_pic" src="" alt="Middle Image">
-        
-        <p id="middle_pic_h2">Default Middle</p>
-      </div>
-
-      <div id="right_img_content">
-        <img id="right_pic" src="" alt="Right Image">
-        
-        <p id="right_pic_h2">Default Right</p>
-      </div>
-
-    </section>
-
+    </ul>
     <section id="chart">
+        <canvas id="myChart" width="25px" height="50px"></canvas>    
+        </section>
+</main>
+<footer>© 2019-Bus Mall Project</footer>
 
-  <canvas id="myChart" width="400" height="400"></canvas>      
-
-    </section>
-<body>
-  
+<body>    
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
   <script src="./js/app.js"></script>
-</body>
 
+  </body>
 </html>

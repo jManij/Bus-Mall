@@ -1,4 +1,4 @@
-*{
+/* *{
   box-sizing: border-box;
 }
 
@@ -22,6 +22,12 @@ header {
   margin-top: 50px;
   width: 500px;
   border:  double azure;
+}
+
+img {
+  float: left;
+  max-height: 250px;
+  max-width: 250px;
 }
 
 
@@ -64,12 +70,7 @@ aside{
   padding-left: 30px;
 }
 
-img {
-  float: left;
-  max-height: 250px;
-  max-width: 250px;
-  /* margin-right: 30px; */
-}
+
 
 li {
   display: inline-block;
@@ -97,4 +98,84 @@ section div {
   float: left;
   width: 50%;
 }
+ */
 
+ *{
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+header {
+  height: 60px;
+  position: relative;
+  background-color: darkcyan;  
+  margin-bottom: 30px;
+}
+
+main, nav {
+  width: 960px;
+  margin:auto;
+}
+
+nav > ul {
+  position: absolute;
+  top: 80%;
+  margin-top: -40px;
+}
+
+nav > ul > li {
+  float: left;
+  margin-right: 50px;
+  line-height: 40px;
+}
+
+img {
+  height:200px;
+  widows: 200px;
+}
+
+#logo {
+  height: 40px;
+  width: 50px;;
+}
+
+main > section > ul > section{
+  float: left;
+  margin-right: 30px;
+}
+
+main > section > ul > section:nth-child(1){
+  text-align: center;
+}
+main > section > ul > section:nth-child(2){
+  text-align: center;
+}
+main > section > ul > section:nth-child(3){
+  text-align: center;
+}
+
+
+/* Check this */
+main > section > ul > section:hover{
+  background-color: green;
+  transition: 350ms;
+}
+
+
+footer {
+  background-color: darkcyan;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  height: 60px;
+  text-align: center;
+}
+
+aside{ 
+  padding-left: 30px;
+}

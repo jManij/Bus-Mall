@@ -118,7 +118,7 @@ function createChart() {
   }
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'pie',
     data: {
       labels: arrayOfFileNames,
       datasets: [{
@@ -144,6 +144,8 @@ function createChart() {
       }]
     },
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
       scales: {
         yAxes: [{
           ticks: {
@@ -174,7 +176,7 @@ renderDisplayImages(index_values[0], index_values[1], index_values[2]);
 
 var handleClickOnImage = function(event){
 
-  if (totalAllowedClicks < 25) {
+  if (totalAllowedClicks < 5) {
     var id = event.target.id;
     var index_values = generateRandomImageIndex(lengthOfObjects-1);
     arrayOfPictures[index_values[0]].timeShown++;

@@ -134,7 +134,7 @@ nav > ul > li {
 
 img {
   height:200px;
-  widows: 200px;
+  width: 200px;
 }
 
 #logo {
@@ -145,6 +145,7 @@ img {
 main > section > ul > section{
   float: left;
   margin-right: 30px;
+  margin-bottom: 20px;
 }
 
 main > section > ul > section:nth-child(1){

@@ -176,7 +176,7 @@ renderDisplayImages(index_values[0], index_values[1], index_values[2]);
 
 var handleClickOnImage = function(event){
 
-  if (totalAllowedClicks < 5) {
+  if (totalAllowedClicks < 25) {
     var id = event.target.id;
     var index_values = generateRandomImageIndex(lengthOfObjects-1);
     arrayOfPictures[index_values[0]].timeShown++;

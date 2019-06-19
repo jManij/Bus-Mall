@@ -82,17 +82,17 @@ function renderSummaryDisplay() {
 function generateRandomImageIndex(max) {
   //Generate left id that has not been used previously
   do {
-    var left_id = Math.floor(Math.random() * Math.floor(max));
+    var left_id = Math.round(Math.random() * Math.floor(max));
   } while(left_id === indexOfRecentPictues[0] || left_id === indexOfRecentPictues[1] || left_id === indexOfRecentPictues[2]);
 
   //Generate middle id that has not been used previously
   do {
-    var middle_id = Math.floor(Math.random() * Math.floor(max));
+    var middle_id = Math.round(Math.random() * Math.floor(max));
   } while(middle_id === indexOfRecentPictues[0] || middle_id === indexOfRecentPictues[1] || middle_id === indexOfRecentPictues[2] || middle_id === left_id);
 
   //Generate right id that has not been used previously
   do {
-    var right_id = Math.floor(Math.random() * Math.floor(max));
+    var right_id = Math.round(Math.random() * Math.floor(max));
   } while(right_id === indexOfRecentPictues[0] || right_id === indexOfRecentPictues[1] || right_id === indexOfRecentPictues[2] || right_id === left_id || right_id === middle_id);
 
   //Delete the previous storage and maintain the recent copy of the used indices

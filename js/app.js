@@ -1,3 +1,4 @@
+/* eslint-disable no-undef: This is to ensure that the methods and properties from other classes could be called */
 /* Bus Mall Project
    Manish KC
 */
@@ -11,9 +12,7 @@ var indexOfRecentPictues = []; //Array containing the ids of three most recent p
 var lengthOfObjects = 20; //Update this variable with new images added into the project
 var totalAllowedClicks = 0;
 
-
 //Rendering Global variables to collect elements & tags
-var imageSectionTag = document.getElementById('all_pictures');
 var leftImageTag = document.getElementById('left_pic');
 var leftPTag = document.getElementById('left_pic_h2');
 
@@ -23,7 +22,6 @@ var middlePTag = document.getElementById('middle_pic_h2');
 var rightImageTag = document.getElementById('right_pic');
 var rightPTag = document.getElementById('right_pic_h2');
 
-
 /***************************** CONSTRUCTOR *****************************************/
 function Pictures(name, id, URL) {
   this.name = name;
@@ -32,7 +30,6 @@ function Pictures(name, id, URL) {
   this.clickCounter = 0;
   this.timeShown = 0;
 }
-
 /*********************** HELPER FUNCTIONS *******************************************/
 
 function setFileNames() {
@@ -65,19 +62,12 @@ function renderDisplayImages(left_id, middle_id, right_id) {
   rightImageTag.id = arrayOfPictures[right_id].id;
   rightImageTag.src = arrayOfPictures[right_id].URL;
   rightPTag.textContent = arrayOfPictures[right_id].name;
+
+  updateTimeShown(left_id);
+  updateTimeShown(middle_id);
+  updateTimeShown(right_id);
 }
 
-//Rendering Summary in the display
-function renderSummaryDisplay() {
-  var ulId = document.getElementById('clicks-count');
-  var liId = [];
-
-  for (var i = 0; i < lengthOfObjects; i++) {
-    liId[i] = document.createElement('li');
-    liId[i].textContent = arrayOfPictures[i].name + ': ' + arrayOfPictures[i].clickCounter + '  Times'+ arrayOfPictures[i].timeShown;
-    ulId.appendChild(liId[i]);
-  }
-}
 //Generates three random indices (left_index, middle_index, & right_index) used torender the display
 function generateRandomImageIndex(max) {
   //Generate left id that has not been used previously
@@ -111,55 +101,35 @@ function consoleClickCounts() {
   }
 }
 
-function createChart() {
-  var percentages = [];
-  for (var i =0; i < lengthOfObjects; i++) {
-    percentages.push(Math.round((arrayOfPictures[i].clickCounter / arrayOfPictures[i].timeShown) * 100));
-  }
-  var ctx = document.getElementById('myChart').getContext('2d');
-  var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: arrayOfFileNames,
-      datasets: [{
-        label: '# of Votes',
-        data: percentages,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
-      }
-    }
-  });
+
+/* Function to be called when the picture object is clicked.
+   Updates clickCounter and timeshown for the object, whose id is passed
+   @arg: id of the object
+*/
+function updateClicksInStorage(id) {
+  var key = arrayOfPictures[id].name; //name of the object
+
+  //Ensure that the object has already been created
+  var objectKey = JSON.parse(localStorage.getItem(key));
+
+  objectKey.clickCounter = objectKey.clickCounter + 1;
+  localStorage.setItem(key, JSON.stringify(objectKey));
+}
+
+/* Function to update the object's timeShown.
+   @arg:id of the object
+ */
+function updateTimeShown(id) {
+  var key = arrayOfPictures[id].name; //name of the object
+
+  //Ensure that the object has already been created
+  var objectKey = JSON.parse(localStorage.getItem(key));
+
+  objectKey.timeShown += 1;
+  localStorage.setItem(key, JSON.stringify(objectKey));
 }
 
 /*********************** HELPER FUNCTIONS ENDLINE *******************************************/
-
-
 
 /*********************** DEFAULT *******************************************/
 
@@ -171,27 +141,26 @@ arrayOfPictures[index_values[1]].timeShown++;
 arrayOfPictures[index_values[2]].timeShown++;
 renderDisplayImages(index_values[0], index_values[1], index_values[2]);
 
-
 /*********************** DRIVER *******************************************/
 
 var handleClickOnImage = function(event){
 
   if (totalAllowedClicks < 25) {
     var id = event.target.id;
+    updateClicksInStorage(id); //Update the total clicks for the clicked item in storage
     var index_values = generateRandomImageIndex(lengthOfObjects-1);
     arrayOfPictures[index_values[0]].timeShown++;
     arrayOfPictures[index_values[1]].timeShown++;
     arrayOfPictures[index_values[2]].timeShown++;
     renderDisplayImages(index_values[0], index_values[1], index_values[2]);
     arrayOfPictures[id].clickCounter++;
-    // console.log(event.target.id);
     totalAllowedClicks++;
   } else {
     leftImageTag.removeEventListener('click', handleClickOnImage);
     middleImageTag.removeEventListener('click', handleClickOnImage);
     rightImageTag.removeEventListener('click', handleClickOnImage);
     consoleClickCounts();
-    // renderSummaryDisplay();
+    // eslint-disable-next-line no-undef
     createChart();
   }
 };

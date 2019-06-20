@@ -10,7 +10,7 @@ header {
   height: 60px;
   position: relative;
   background-color: darkcyan;  
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 main, nav {
@@ -43,7 +43,7 @@ img {
 main > section > ul > section{
   float: left;
   margin-right: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 80px;
 }
 
 main > section > ul > section:nth-child(1){
@@ -56,11 +56,15 @@ main > section > ul > section:nth-child(3){
   text-align: center;
 }
 
+/* canvas {
+  margin-left: 30px;
+  align-content: center;
 
-/* Check this */
+} */
+
 main > section > ul > section:hover{
   background-color: green;
-  transition: 350ms;
+  transition: 30ms;
 }
 
 
@@ -75,6 +79,9 @@ footer {
   text-align: center;
 }
 
-aside{ 
-  padding-left: 30px;
+#chart {  
+  height: 300px;
+  width: 800px;
+  margin:auto;
+  float: left;
 }

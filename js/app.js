@@ -149,7 +149,7 @@ renderDisplayImages(index_values[0], index_values[1], index_values[2]);
 
 var handleClickOnImage = function(event){
 
-  if (totalAllowedClicks < 3) {
+  if (totalAllowedClicks < 25) {
     var id = event.target.id;
     updateClicksInStorage(id); //Update the total clicks for the clicked item in storage
     var index_values = generateRandomImageIndex(lengthOfObjects-1);

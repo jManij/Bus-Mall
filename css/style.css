@@ -1,5 +1,6 @@
  *{
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 ul {
@@ -10,7 +11,7 @@ header {
   height: 60px;
   position: relative;
   background-color: darkcyan;  
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 main, nav {
@@ -43,7 +44,7 @@ img {
 main > section > ul > section{
   float: left;
   margin-right: 30px;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 
 main > section > ul > section:nth-child(1){
@@ -56,11 +57,10 @@ main > section > ul > section:nth-child(3){
   text-align: center;
 }
 
-/* canvas {
-  margin-left: 30px;
-  align-content: center;
-
-} */
+main > section > h3 {
+  margin-left: 230px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 
 main > section > ul > section:hover{
   background-color: green;

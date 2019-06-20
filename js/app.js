@@ -122,11 +122,15 @@ function updateClicksInStorage(id) {
 function updateTimeShown(id) {
   var key = arrayOfPictures[id].name; //name of the object
 
-  //Ensure that the object has already been created
-  var objectKey = JSON.parse(localStorage.getItem(key));
-
-  objectKey.timeShown += 1;
-  localStorage.setItem(key, JSON.stringify(objectKey));
+  if(JSON.parse(localStorage.getItem(arrayOfPictures[id].name)) === null) {
+    console.log('updateTImeShown');
+    var value = JSON.stringify(arrayOfPictures[id]); //The object to be holded by the storage
+    localStorage.setItem(key, value);
+  } else {
+    var objectKey = JSON.parse(localStorage.getItem(key));
+    objectKey.timeShown += 1;
+    localStorage.setItem(key, JSON.stringify(objectKey));
+  }
 }
 
 /*********************** HELPER FUNCTIONS ENDLINE *******************************************/

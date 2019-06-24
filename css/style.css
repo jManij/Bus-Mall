@@ -10,7 +10,7 @@ ul {
 header {
   height: 60px;
   position: relative;
-  background-color: darkcyan;  
+  background-color: black;  
   margin-bottom: 30px;
 }
 
@@ -29,6 +29,9 @@ nav > ul > li {
   float: left;
   margin-right: 50px;
   line-height: 40px;
+}
+nav > ul > li :nth-child(1) {
+  color:white;
 }
 
 img {
@@ -69,7 +72,8 @@ main > section > ul > section:hover{
 
 
 footer {
-  background-color: darkcyan;
+  background-color: black;
+  color:azure;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -84,4 +88,8 @@ footer {
   width: 800px;
   margin:auto;
   float: left;
+}
+
+body {
+  background-color:wheat;
 }
